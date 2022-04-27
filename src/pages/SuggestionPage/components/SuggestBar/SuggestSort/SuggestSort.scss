@@ -1,0 +1,77 @@
+@use "../../../../../styles.scss";
+
+.suggest-sort {
+    line-height: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    color: styles.$font-color-2;
+
+    .sort {
+        text-transform: capitalize;
+    }
+
+    .sort-text:before {
+        content: 'Sort by : ';
+
+        @media (max-width: 450px) {
+            content: 'Sort : ';
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            content: 'Sort by : ';
+        }
+    }
+    .bold {
+        font-weight: 700;
+    }
+
+    .arrow {
+        margin-left: 9px;
+        path {
+            stroke: styles.$font-color-1;
+        }
+    }
+
+    .dropdown {
+        position: absolute;
+        top: calc(100% + 16px);
+        background-color: styles.$color-4;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px -7px rgba(55, 63, 104, 0.35);
+        width: 255px;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.2s;
+        z-index: 1;
+
+        ul li {
+            padding: 12px 0 12px 24px;
+            border-bottom: 1px solid rgba(55, 63, 104, 0.15);
+            color: styles.$font-color-3;
+            font-size: 1rem;
+            line-height: 23px;
+
+            &.active {
+                background: url("../../../../../assets/shared/icon-check.svg") no-repeat center right 24px;
+            }
+
+            &:hover {
+                color: styles.$font-color-4;
+            }
+
+            &:last-child {
+                border-bottom: 1px solid transparent;
+            }
+        }
+    }
+
+    &.dropdown-active {
+        color:rgba(242, 244, 254, 0.75);
+
+        .dropdown {
+            visibility: visible;
+            opacity: 100;
+        }
+    }
+}
+

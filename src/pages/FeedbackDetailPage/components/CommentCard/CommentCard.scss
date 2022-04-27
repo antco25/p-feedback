@@ -1,0 +1,234 @@
+@use "../../../../styles.scss";
+
+$size-tablet-2: 680px;
+$size-tablet-3: 500px;
+
+.comment-card {
+    display: grid;
+    grid-template-columns: 40px 32px auto 16px fit-content(117px);
+    grid-template-areas:
+        "avatar . name . reply-toggle"
+        "thread-line . content content content"
+        "thread-line . reply-box . reply-button";
+    align-items: start;
+
+    @media (max-width: $size-tablet-2) {
+        grid-template-areas:
+            "avatar . name . reply-toggle"
+            "content content content content content"
+            "reply-box reply-box reply-box . reply-button";
+    }
+
+    @media (max-width: $size-tablet-3) {
+        grid-template-columns: 40px 16px auto 16px fit-content(117px);
+        grid-template-areas:
+            "avatar . name . reply-toggle"
+            "content content content content content"
+            "reply-box reply-box reply-box reply-box reply-box"
+            "reply-button reply-button reply-button reply-button reply-button";
+    }
+
+    .avatar {
+        grid-area: avatar;
+        width: 40px;
+        border-radius: 50%;
+    }
+
+    .name-wrap {
+        grid-area: name;
+
+        .name {
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 700;
+            color: styles.$font-color-6;
+        }
+
+        .username {
+            font-size: 14px;
+            line-height: 20px;
+            color: styles.$font-color-3;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            .name,
+            .username {
+                font-size: 13px;
+                line-height: 19px;
+            }
+        }
+    }
+
+    .content {
+        grid-area: content;
+        font-size: 15px;
+        line-height: 22px;
+        padding-top: 17px;
+        color: styles.$font-color-3;
+
+        & > .replyTo {
+            color: styles.$font-color-4;
+            font-weight: 700;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            font-size: 13px;
+            line-height: 19px;
+            padding-top: 16px;
+        }
+    }
+
+    .reply-toggle {
+        grid-area: reply-toggle;
+        justify-self: end;
+        align-self: center;
+        font-size: 13px;
+        line-height: 19px;
+        font-weight: 600;
+        color: styles.$font-color-5;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .reply-box {
+        grid-area: reply-box;
+        height: 80px;
+        margin-bottom: 32px;
+
+        &.error {
+            border: 1px solid styles.$color-12;
+        }
+
+        @media (max-width: $size-tablet-3) {
+            margin-bottom: 0;
+        }
+    }
+
+    &.last .reply-box,
+    &.last-child .reply-box {
+        margin-bottom: 0;
+    }
+
+    .reply-button {
+        grid-area: reply-button;
+        padding: 0.75rem 1.375rem;
+
+        @media (max-width: $size-tablet-3) {
+            margin-bottom: 24px;
+        }
+    }
+
+    &.last .reply-button,
+    &.last-child .reply-button {
+        @media (max-width: $size-tablet-3) {
+            margin-bottom: 0;
+        }
+    }
+
+    .reply-box,
+    .reply-button {
+        margin-top: 24px;
+
+        @media (max-width: styles.$size-mobile) {
+            margin-top: 16px;
+        }
+    }
+
+    &.collapsed {
+        .content {
+            padding-bottom: 32px;
+
+            @media (max-width: styles.$size-mobile) {
+                padding-bottom: 24px;
+            }
+        }
+        > .reply-box,
+        > .reply-button {
+            visibility: hidden;
+            max-height: 0;
+            padding: 0;
+            margin: 0;
+            border: none;
+        }
+    }
+
+    .child-comments {
+        grid-area: child-comments;
+        padding-left: 5px;
+    }
+
+    .thread-line {
+        grid-area: thread-line;
+        align-self: stretch;
+        justify-self: center;
+        width: 1px;
+        margin: 23px 0 0 0;
+        background-color: styles.$color-18;
+        color: styles.$color-18;
+        border: none;
+        opacity: 0.25;
+
+        @media (max-width: $size-tablet-2) {
+            display: none;
+        }
+    }
+
+    &.child {
+        grid-template-columns: 40px 45px 32px auto 16px fit-content(117px);
+        grid-template-areas:
+            "thread-line avatar . name . reply-toggle"
+            "thread-line . . content content content"
+            "thread-line . . reply-box . reply-button";
+
+        @media (max-width: $size-tablet-2) {
+            grid-template-columns: 24px 40px 32px auto 16px fit-content(117px);
+            grid-template-areas:
+                "thread-line avatar . name . reply-toggle"
+                "thread-line content content content content content"
+                "thread-line reply-box reply-box reply-box . reply-button";
+        }
+
+        @media (max-width: $size-tablet-3) {
+            grid-template-columns: 24px 40px 16px auto 16px fit-content(117px);
+            grid-template-areas:
+                "thread-line avatar . name . reply-toggle"
+                "thread-line content content content content content"
+                "thread-line reply-box reply-box reply-box reply-box reply-box"
+                "thread-line reply-button reply-button reply-button reply-button reply-button";
+        }
+
+        .avatar {
+            margin-left: 5px;
+
+            @media (max-width: $size-tablet-2) {
+                margin-left: 0;
+            }
+        }
+
+        & > .thread-line {
+            grid-area: thread-line;
+            margin: 0;
+            display: block;
+
+            @media (max-width: $size-tablet-2) {
+                justify-self: start;
+            }
+        }
+    }
+
+    &.last-child {
+        & > .thread-line {
+            height: 20px;
+        }
+    }
+
+    &.last-child.collapsed,
+    &.last.collapsed {
+        .content {
+            padding-bottom: 0;
+        }
+    }
+}

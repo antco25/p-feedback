@@ -1,0 +1,14 @@
+.fade-appear, .fade-enter {
+    opacity: 0;
+    position: relative;
+    top: 40px;
+}
+.fade-appear-active, .fade-enter-active {
+    opacity: 1;
+    top: 0;
+    transition: opacity 300ms ease-in-out, top 300ms ease-in-out;
+}
+
+.fade-enter-done {
+    opacity: 1;
+}

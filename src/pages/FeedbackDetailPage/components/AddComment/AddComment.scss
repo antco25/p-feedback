@@ -1,0 +1,45 @@
+@use "../../../../styles.scss";
+
+.add-comment {
+    padding: 24px 32px 32px 32px;
+
+    .loading {
+        @include styles.loadingBlur;
+    }
+
+    @media (max-width: styles.$size-mobile) {
+        padding: 24px;
+    }
+
+    .title {
+        font-size: 18px;
+        line-height: 26px;
+        margin-bottom: 24px;
+    }
+
+    .reply-box {
+        height: 80px;
+        margin-bottom: 16px;
+
+        &.error {
+            border: 1px solid styles.$color-12;
+        }
+    }
+
+    .control-wrap {
+        display: flex;
+        align-items: center;
+
+        .char-left {
+            margin-right: auto;
+            font-size: 15px;
+            line-height: 22px;
+            color: styles.$font-color-3;
+
+            @media (max-width: styles.$size-mobile) {
+                font-size: 13px;
+                line-height: 19px;
+            }
+        }
+    }
+}

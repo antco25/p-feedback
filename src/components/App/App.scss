@@ -1,0 +1,171 @@
+@use "../../styles.scss";
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 1190px;
+  margin: auto;
+  box-sizing: content-box;
+
+  @media (max-width: styles.$size-mobile) {
+    width: styles.$size-mobile;
+  }
+
+  .link-button {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.875rem; //14px
+    font-weight: 700;
+    line-height: 20px;
+    color: styles.$font-color-2;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+
+    &:not([disabled]) {
+      cursor: pointer;
+    }
+  
+    @media (max-width: 450px) {
+      font-size: 0.8125rem; //13px
+      padding: 0.625rem 1rem;
+    }
+
+    &.bt-1 {
+      background-color: styles.$bg-button-1;
+
+      &:hover:not([disabled]) {
+        background-color: styles.$color-3;
+      }
+    }
+
+    &.bt-2 {
+      background-color: styles.$bg-button-2;
+
+      &:hover:not([disabled]) {
+        background-color: styles.$color-16;
+      }
+    }
+
+    &.bt-3 {
+      background-color: styles.$bg-button-3;
+
+      &:hover:not([disabled]) {
+        background-color: styles.$color-15;
+      }
+    }
+
+    &.bt-4 {
+      background-color: styles.$bg-button-4;
+
+      &:hover:not([disabled]) {
+        background-color: styles.$color-17;
+      }
+    }
+  }
+
+  .category {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: styles.$font-color-5;
+    background-color: styles.$color-5;
+    padding: 6px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: styles.$color-14;
+    }
+
+    &.active {
+      color: styles.$font-color-1;
+      background-color: styles.$color-2;
+    }
+  }
+
+  .return-link {
+    display: inline-block;
+    background: url("../../assets/shared/icon-arrow-left.svg") no-repeat left center;
+    font-size: 14px;
+    line-height: 20px;
+    color: styles.$font-color-3;
+    padding-left: 16px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: styles.$size-mobile) {
+      font-size: 13px;
+      line-height: 19px;
+    }
+  }
+
+  .suggest-card {
+    border-radius: 10px;
+    background-color: styles.$color-4;
+
+    .title {
+      color: styles.$font-color-6;
+      font-weight: 700;
+    }
+
+    .desc {
+      color: styles.$font-color-3;
+    }
+
+    @media (max-width: styles.$size-mobile) {
+      margin: 0 24px;
+    }
+  }
+
+  .text-area {
+    width: 100%;
+    border-radius: 5px;
+    font-size: 15px;
+    line-height: 22px;
+    color: styles.$font-color-6;
+    font-family: inherit;
+    border: 1px solid styles.$color-6;
+    outline: none;
+    background-color: styles.$color-6;
+    resize: none;
+    padding: 16px 24px;
+    margin: 0;
+    overflow-y: hidden;
+
+    &::placeholder {
+      color: styles.$color-18;
+      opacity: 1;
+    }
+
+    &:focus {
+      border: 1px solid styles.$color-2;
+    }
+
+    @media (max-width: styles.$size-mobile) {
+      padding: 16px;
+      font-size: 13px;
+      line-height: 19px;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

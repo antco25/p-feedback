@@ -1,0 +1,58 @@
+@use "../../styles.scss";
+
+.suggestion-page {
+    margin: 94px 0 130px 0;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 255px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "feedback suggestBar"
+        "feedback card";
+    column-gap: 30px;
+
+    .feedback-board {
+        grid-area: feedback;
+    }
+    .suggest-bar {
+        grid-area: suggestBar;
+    }
+
+    .suggest-cards {
+        grid-area: card;
+
+        .suggest-card.suggestion {
+            margin-bottom: 20px;
+
+            @media (max-width: 968px) {
+                margin-bottom: 16px;
+            }
+        }
+    }
+
+    @media (max-width: 968px) {
+        grid-template-columns: auto;
+        grid-template-areas:
+            "feedback" "suggestBar" "card";
+
+        .feedback-board {
+            grid-area: feedback;
+        }
+        .suggest-bar {
+            grid-area: suggestBar;
+        }
+
+        .suggest-cards {
+            grid-area: card;
+        }
+    }
+
+    @media (max-width: 500px) {
+        padding: 0 24px;
+    }
+
+    @media (max-width: styles.$size-mobile) {
+        margin: 0 0 55px 0;
+        padding: 0;
+    }
+}

@@ -1,0 +1,278 @@
+@use "../../styles.scss";
+
+$desktop-1: 968px;
+$tablet-1: 650px;
+$tablet-2: 500px;
+
+.roadmap-page {
+    max-width: 1190px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 78px 40px 180px 40px;
+
+    @media (max-width: $tablet-1) {
+        padding: 78px 24px 180px 24px;
+    }
+
+    @media (max-width: styles.$size-mobile) {
+        padding: 0 0 98px 0;
+    }
+
+    .header {
+        background-color: styles.$color-11;
+        padding: 27px 40px 27px 32px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 48px;
+
+        @media (max-width: styles.$size-tablet) {
+            margin-bottom: 32px;
+        }
+
+        @media (max-width: $tablet-1) {
+            margin-bottom: 0px;
+        }
+
+        @media (max-width: $tablet-2) {
+            padding: 26px 24px;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            border-radius: 0;
+        }
+
+        .title-wrap {
+            display: inline-block;
+            margin-right: auto;
+
+            .title,
+            .return-link {
+                color: styles.$font-color-1;
+                font-weight: 700;
+            }
+
+            .title {
+                font-size: 24px;
+                line-height: 35px;
+
+                @media (max-width: $tablet-2) {
+                    font-size: 18px;
+                    line-height: 26px;
+                }
+            }
+
+            .return-link {
+                margin-bottom: 4px;
+                display: block;
+                background: url("./icon-arrow-left-colored.svg") no-repeat left center;
+            }
+        }
+    }
+
+    .status-nav {
+        display: none;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 19px;
+        color: styles.$font-color-6;
+        margin-bottom: 24px;
+
+        @media (max-width: $tablet-1) {
+            display: block;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            font-size: 13px;
+        }
+
+        ul {
+            display: flex;
+
+            li {
+                cursor: pointer;
+                flex: 1 1 0px;
+                text-align: center;
+                padding: 20px 0 20px 0;
+                border-bottom: 1px solid rgba(140, 146, 179, 0.4);
+
+                span {
+                    opacity: 0.4;
+                }
+
+                &.active,
+                &:hover {
+                    span {
+                        opacity: 1;
+                    }
+                    padding: 20px 0 16px 0;
+                    border-bottom-width: 4px;
+
+                    &.planned {
+                        border-bottom-color: styles.$color-9;
+                    }
+
+                    &.in-progress {
+                        border-bottom-color: styles.$color-1;
+                    }
+
+                    &.live {
+                        border-bottom-color: styles.$color-10;
+                    }
+                }
+            }
+        }
+
+        &.loading {
+            ul li {
+                cursor: unset;
+            }
+            ul li.active,
+            ul li:hover {
+                &.planned,
+                &.in-progress,
+                &.live {
+                    border-bottom: 1px solid rgba(140, 146, 179, 0.4);
+                }
+            }
+
+            ul li span {
+                @include styles.loadingBlur;
+            }
+        }
+    }
+
+    .road-map {
+        display: flex;
+        column-gap: 30px;
+
+        @media (max-width: $desktop-1) {
+            column-gap: 15px;
+        }
+
+        @media (max-width: styles.$size-tablet) {
+            column-gap: 10px;
+        }
+
+        @media (max-width: $tablet-1) {
+            flex-direction: column;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            margin: 0 24px;
+        }
+
+        &.loading {
+            .status-col .title-wrap {
+                @include styles.loadingBlur;
+            }
+        }
+
+        .status-col {
+            flex: 1 1 0px;
+
+            .title-wrap {
+                margin-bottom: 32px;
+
+                .title {
+                    font-size: 18px;
+                    font-weight: 700;
+                    line-height: 26px;
+                    color: styles.$font-color-6;
+                    margin-bottom: 4px;
+                }
+
+                .sub {
+                    font-size: 16px;
+                    line-height: 23px;
+                    color: styles.$font-color-3;
+                }
+
+                @media (max-width: $desktop-1) {
+                    .title {
+                        font-size: 16px;
+                    }
+
+                    .sub {
+                        font-size: 14px;
+                    }
+                }
+
+                @media (max-width: styles.$size-tablet) {
+                    .title,
+                    .sub {
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
+
+                    margin-bottom: 24px;
+                }
+
+                @media (max-width: $tablet-1) {
+                    .title {
+                        font-size: 18px;
+                        line-height: 26px;
+                    }
+
+                    .sub {
+                        font-size: 13px;
+                        line-height: 19px;
+                    }
+                }
+            }
+
+            .status-content {
+                display: flex;
+                flex-direction: column;
+                row-gap: 24px;
+
+                @media (max-width: $tablet-1) {
+                    flex-direction: row;
+                    column-gap: 10px;
+                    flex-wrap: wrap;
+
+                    a {
+                        flex-basis: calc(50% - 10px);
+                    }
+                }
+
+                @media (max-width: $tablet-2) {
+                    flex-direction: column;
+
+                    a {
+                        flex-basis: auto;
+                    }
+                }
+            }
+
+            @media (max-width: $tablet-1) {
+                position: relative;
+                visibility: hidden;
+                max-height: 0;
+                opacity: 0;
+                transition: opacity 0.5s, top 0.5s;
+                top: 10px;
+
+                .title-wrap,
+                .status-content {
+                    display: none;
+                }
+
+                &.active {
+                    visibility: visible;
+                    max-height: none;
+                    opacity: 1;
+                    top: 0px;
+
+                    .title-wrap {
+                        display: block;
+                    }
+
+                    .status-content {
+                        display: flex;
+                    }
+                }
+            }
+        }
+    }
+}

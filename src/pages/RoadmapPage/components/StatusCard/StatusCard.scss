@@ -1,0 +1,233 @@
+@use "../../../../styles.scss";
+
+$desktop-1: 968px;
+
+.status-card {
+    padding-top: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &.planned {
+        background-color: styles.$color-9;
+
+        .dot {
+            background-color: styles.$color-9;
+        }
+    }
+
+    &.in-progress {
+        background-color: styles.$color-1;
+
+        .dot {
+            background-color: styles.$color-1;
+        }
+    }
+
+    &.live {
+        background-color: styles.$color-10;
+
+        .dot {
+            background-color: styles.$color-10;
+        }
+    }
+
+    .content-wrap {
+        padding: 24px 32px 32px 32px;
+        border-radius: 0 0 5px 5px;
+        background-color: styles.$color-4;
+
+        &:hover {
+            .title {
+                color: styles.$font-color-5;
+            }
+        }
+
+        @media (max-width: $desktop-1) {
+            padding: 20px 20px 24px 20px;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            padding: 16px 24px 24px 24px;
+        }
+    }
+
+    .status {
+        font-size: 16px;
+        line-height: 24px;
+        color: styles.$font-color-3;
+        text-transform: capitalize;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+
+        @media (max-width: $desktop-1) {
+            font-size: 14px;
+        }
+
+        @media (max-width: styles.$size-tablet) {
+            font-size: 13px;
+            line-height: 19px;
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            margin-bottom: 16px;
+        }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 16px;
+
+            @media (max-width: styles.$size-tablet) {
+                margin-right: 8px;
+            }
+        }
+    }
+
+    .title {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 26px;
+        color: styles.$font-color-6;
+        margin-bottom: 4px;
+
+        @media (max-width: $desktop-1) {
+            font-size: 16px;
+        }
+
+        @media (max-width: styles.$size-tablet) {
+            font-size: 13px;
+            line-height: 19px;
+            margin-bottom: 9px;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            margin-bottom: 9px;
+            font-size: 13px;
+            line-height: 19px;
+        }
+    }
+
+    .description {
+        font-size: 16px;
+        line-height: 23px;
+        color: styles.$font-color-3;
+        margin-bottom: 16px;
+
+        @media (max-width: $desktop-1) {
+            font-size: 14px;
+        }
+
+        @media (max-width: styles.$size-tablet) {
+            font-size: 13px;
+            line-height: 19px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            font-size: 13px;
+            line-height: 19px;
+            margin-bottom: 8px;
+        }
+    }
+
+    .category {
+        text-transform: capitalize;
+        margin-bottom: 16px;
+    }
+
+    .comment-wrap {
+        display: flex;
+        align-items: center;
+    }
+
+    .upvotes {
+        display: inline-block;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 20px;
+        color: styles.$font-color-6;
+        background-color: styles.$color-5;
+        border-radius: 10px;
+        padding: 10px 12px 10px 16px;
+        margin-right: auto;
+
+        @media (max-width: styles.$size-tablet) {
+            padding: 6px 12px 6px 16px;
+        }
+
+        &:hover {
+            background-color: styles.$color-14;
+        }
+
+        &.active {
+            color: styles.$font-color-1;
+            background-color: styles.$color-2;
+
+            svg path {
+                stroke: styles.$font-color-1;
+            }
+        }
+
+        svg {
+            margin-right: 10px;
+        }
+    }
+
+    .comments-num {
+        display: inline-block;
+        color: styles.$font-color-6;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 23px;
+        background: url("../../../../assets/shared/icon-comments.svg") no-repeat center left;
+        padding-left: 26px;
+
+        &.empty span {
+            opacity: 0.5;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            font-size: 13px;
+            line-height: 19px;
+        }
+    }
+
+    &.loading {
+        @include styles.loadingBlur;
+        cursor: unset;
+        background-color: styles.$font-color-3;
+
+        .dot {
+            background-color: styles.$font-color-3;
+        }
+
+        .title {
+            width: 40%;
+            background-color: styles.$font-color-3;
+            @include styles.loadingBlur;
+        }
+
+        .description {
+            width: 80%;
+            background-color: styles.$font-color-3;
+            @include styles.loadingBlur;
+        }
+
+        .category {
+            cursor: unset;
+            &:hover {
+                background-color: styles.$color-5;
+            }
+        }
+
+        .upvotes {
+            &:hover {
+                background-color: styles.$color-5;
+            }
+        }
+    }
+}

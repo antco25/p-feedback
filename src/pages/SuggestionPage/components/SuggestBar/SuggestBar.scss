@@ -1,0 +1,49 @@
+@use "../../../../styles.scss";
+
+.suggest-bar {
+    background-color: styles.$color-bg-suggest-bar;
+    border-radius: 10px;
+    padding: 14px 16px 14px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    @media (max-width: 450px) {
+        padding: 8px 15px 8px 24px;
+    }
+
+    @media (max-width: styles.$size-mobile) {
+        border-radius: 0;
+        padding: 8px 24px;
+        box-shadow: none;
+        margin-bottom: 32px;
+    }
+
+    .suggest-count {
+        color: styles.$font-color-1;
+        font-size: 18px;
+        line-height: 26px;
+        font-weight: 700;
+        display: inline-flex;
+        margin-right: 38px;
+
+        img {
+            margin-right: 1rem;
+        }
+
+        &.loading {
+            @include styles.loadingBlur;
+        }
+
+        @media (max-width: 700px) {
+            display: none;
+        }
+    }
+
+    .suggest-add {
+        margin-left: auto;
+    }
+}

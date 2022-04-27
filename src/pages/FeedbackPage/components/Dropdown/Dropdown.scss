@@ -1,0 +1,74 @@
+@use "../../../../styles.scss";
+
+.dropdown {
+    position: relative;
+    cursor: pointer;
+
+    &.disabled {
+        cursor: auto;
+    }
+
+    .value-wrap {
+        display: flex;
+        align-items: center;
+    }
+    .value {
+        display: inline-block;
+        text-transform: capitalize;
+    }
+
+    .arrow {
+        margin-left: auto;
+    }
+
+    .dropdown-inner {
+        position: absolute;
+        top: calc(100% + 16px);
+        left: 0;
+        background-color: styles.$color-4;
+        border-radius: 10px;
+        box-shadow: 0 10px 40px -7px rgba(55, 63, 104, 0.35);
+        width: 100%;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.2s;
+        z-index: 1;
+
+        ul li {
+            padding: 12px 0 12px 24px;
+            border-bottom: 1px solid rgba(55, 63, 104, 0.15);
+            color: styles.$font-color-3;
+            font-size: 1rem;
+            line-height: 23px;
+            text-transform: capitalize;
+
+            &.active {
+                background: url("../../../../assets/shared/icon-check.svg") no-repeat center right 24px;
+            }
+
+            &:hover {
+                color: styles.$font-color-4;
+            }
+
+            &:last-child {
+                border-bottom: 1px solid transparent;
+            }
+        }
+    }
+
+    &.dropdown-active {
+        .dropdown-inner {
+            visibility: visible;
+            opacity: 100;
+        }
+    }
+}
+
+.suggest-sort {
+    .arrow {
+        margin-left: 9px;
+        path {
+            stroke: styles.$font-color-1;
+        }
+    }
+}

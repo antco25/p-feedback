@@ -1,0 +1,37 @@
+@use './styles.scss';
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;600;700&display=swap");
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100vh;
+}
+
+#root {
+  background-color: styles.$color-bg;
+  min-width: 375px;
+}
+
+body {
+  margin: 0;
+  font-family: "Jost", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
+
+  &.no-scroll {
+    overflow-y: hidden;
+  }
+}
+
+

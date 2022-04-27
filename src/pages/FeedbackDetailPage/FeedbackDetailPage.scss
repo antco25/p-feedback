@@ -1,0 +1,85 @@
+@use "../../styles.scss";
+
+$size-tablet-2: 500px;
+
+.feedback-detail-page {
+    padding: 80px 40px 130px 40px;
+    max-width: 810px;
+    width: 100%;
+    margin: 0 auto;
+
+    @media (max-width: styles.$size-tablet) {
+        padding-top: 56px;
+        padding-bottom: 120px;
+    }
+
+    @media (max-width: $size-tablet-2) {
+        padding: 80px 24px 130px 24px;
+    }
+
+    @media (max-width: styles.$size-mobile) {
+        padding: 24px 0 88px 0;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+
+        .edit-button {
+            margin-left: auto;
+
+            &.loading {
+                pointer-events: none;
+                @include styles.loadingBlur;
+            }
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            margin: 0 24px 24px 24px;
+        }
+    }
+
+    .suggest-card {
+        margin-bottom: 24px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .comments {
+        padding: 24px 32px 48px 32px;
+
+        @media (max-width: styles.$size-mobile) {
+            padding: 24px;
+        }
+
+        .title {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 28px;
+
+            @media (max-width: styles.$size-mobile) {
+                margin-bottom: 24px;
+            }
+        }
+
+        .divider {
+            margin: 0;
+            background-color: styles.$color-18;
+            color: styles.$color-18;
+            border: none;
+            opacity: 0.25;
+        }
+
+        .comment-divider {
+            height: 1px;
+            margin: 32px 0;
+            
+            @media (max-width: styles.$size-mobile) {
+                margin: 24px 0;
+            }
+        }
+    }
+}

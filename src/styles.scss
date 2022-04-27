@@ -1,0 +1,48 @@
+/* Colors */
+
+$color-1: #ad1fea;
+$color-2: #4661e6;
+$color-3: #c75af6;
+$color-4: #fff;
+$color-5: #f2f4fe;
+$color-6: #f7f8fd;
+$color-7: #3a4374;
+$color-8: #647196;
+$color-9: #f49f85;
+$color-10: #62bcfa;
+$color-11: #373f68;
+$color-12: #d73737;
+$color-13: #979797;
+$color-14: #cfd7ff;
+$color-15: #e98888;
+$color-16: #656ea3;
+$color-17: #7c91f9;
+$color-18: #8c92b3;
+$color-18: #8397f8;
+
+$color-bg: $color-6;
+$color-bg-suggest-bar: $color-11;
+
+$bg-button-1: $color-1;
+$bg-button-2: $color-7;
+$bg-button-3: $color-12;
+$bg-button-4: $color-2;
+
+$font-color-1: $color-4;
+$font-color-2: $color-5;
+$font-color-3: $color-8;
+$font-color-4: $color-1;
+$font-color-5: $color-2;
+$font-color-6: $color-7;
+$font-color-7: $color-18;
+
+/* Media Query */
+$size-desktop: 1440px;
+$size-tablet: 768px;
+$size-mobile: 375px;
+
+/*Mix-In*/
+@mixin loadingBlur {
+    filter: blur(4px);
+    opacity: 0.3;
+}

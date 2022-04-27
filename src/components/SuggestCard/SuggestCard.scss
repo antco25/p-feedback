@@ -1,0 +1,228 @@
+@use "../../styles.scss";
+
+.suggest-card.suggestion {
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+        "upvotes title ."
+        "upvotes desc comments-num"
+        "upvotes category .";
+    justify-items: start;
+    align-items: start;
+    cursor: pointer;
+
+    &:hover {
+        .title {
+            color: styles.$font-color-5;
+        }
+    }
+
+    &.detail {
+        cursor: auto;
+
+        &:hover {
+            .title {
+                color: styles.$font-color-6;
+            }
+
+            .upvotes {
+                cursor: pointer;
+            }
+        }
+    }
+
+    @media (max-width: 500px) {
+        padding: 24px;
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            "title title"
+            "desc desc"
+            "category category"
+            "upvotes comments-num";
+    }
+
+    .title {
+        grid-area: title;
+        font-size: 18px;
+        line-height: 26px;
+        margin-bottom: 4px;
+
+        @media (max-width: styles.$size-mobile) {
+            margin-bottom: 9px;
+            font-size: 13px;
+            line-height: 19px;
+        }
+    }
+
+    .desc {
+        grid-area: desc;
+        margin-bottom: 12px;
+
+        @media (max-width: styles.$size-mobile) {
+            font-size: 13px;
+            line-height: 19px;
+        }
+    }
+
+    .upvotes {
+        grid-area: upvotes;
+        display: inline-block;
+        position: relative;
+        min-width: 40px;
+        margin-right: 40px;
+        color: styles.$font-color-6;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 20px;
+        text-align: center;
+        background-color: styles.$color-5;
+        border-radius: 10px;
+        padding: 26px 8px 8px 8px;
+
+        &:hover {
+            background-color: styles.$color-14;
+        }
+
+        &.active {
+            color: styles.$font-color-1;
+            background-color: styles.$color-2;
+
+            svg path {
+                stroke: styles.$font-color-1;
+            }
+        }
+
+        svg {
+            position: absolute;
+            width: 10px;
+            top: 14px;
+            left: calc(50% - 5px);
+
+            @media (max-width: 500px) {
+                position: static;
+                margin-right: 10px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            padding: 6px 14px 6px 16px;
+            margin-right: 0;
+        }
+    }
+
+    .category {
+        grid-area: category;
+        text-transform: capitalize;
+
+        @media (max-width: 500px) {
+            margin-bottom: 16px;
+        }
+    }
+
+    .comments-num {
+        grid-area: comments-num;
+        display: inline-block;
+        color: styles.$font-color-6;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 23px;
+        background: url("../../assets/shared/icon-comments.svg") no-repeat center left;
+        padding-left: 26px;
+        margin-left: 16px;
+
+        &.empty span {
+            opacity: 0.5;
+        }
+
+        @media (max-width: 500px) {
+            justify-self: end;
+            align-self: center;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            font-size: 13px;
+            line-height: 19px;
+        }
+    }
+}
+
+.suggest-card.loading {
+    @include styles.loadingBlur;
+    cursor: auto;
+
+    .title {
+        background-color: styles.$font-color-6;
+        @include styles.loadingBlur;
+        width: 40%;
+    }
+
+    .desc {
+        background-color: styles.$font-color-3;
+        @include styles.loadingBlur;
+        width: 80%;
+    }
+
+    .category {
+        cursor: unset;
+        &:hover {
+            background-color: styles.$color-5;
+        }
+    }
+
+    .upvotes {
+        &:hover {
+            background-color: styles.$color-5;
+        }
+    }
+
+
+
+}
+
+.suggest-card.empty {
+    padding: 110px 0px;
+    text-align: center;
+
+    @media (max-width: styles.$size-mobile) {
+        padding: 76px 24px;
+    }
+
+    img {
+        height: 137px;
+        margin: 0 auto 54px auto;
+        display: block;
+
+        @media (max-width: 450px) {
+            height: auto;
+            margin: 0 auto 39px auto;
+        }
+    }
+
+    .title {
+        font-size: 24px;
+        line-height: 35px;
+        margin-bottom: 16px;
+
+        @media (max-width: styles.$size-mobile) {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 14px;
+        }
+    }
+
+    .desc {
+        margin: 0 auto 48px auto;
+        max-width: 410px;
+
+        @media (max-width: 550px) {
+            padding: 0 24px;
+        }
+
+        @media (max-width: styles.$size-mobile) {
+            font-size: 13px;
+            line-height: 19px;
+            margin: 0 auto 24px auto;
+        }
+    }
+}
