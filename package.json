@@ -1,8 +1,8 @@
 {
-  "name": "fm-pro-2",
+  "name": "p-feedback",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://antco25.github.io/fm-pro-2",
+  "homepage": "https://antcodev.ca/p-feedback",
   "dependencies": {
     "@reduxjs/toolkit": "^1.7.2",
     "@testing-library/jest-dom": "^5.16.1",
