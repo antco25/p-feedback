@@ -20,7 +20,7 @@ function FeedbackBoard(props: FeedbackBoardProps) {
 
   useEffect(() => {
     dispatch(fetchRoadmapCount())
-  }, [])
+  }, [dispatch])
 
   const [categories, setCategories] = useState<FeedbackCategory[]>(props.categories);
 
@@ -69,7 +69,6 @@ function FeedbackBoard(props: FeedbackBoardProps) {
     }
   }
 
-  const isTabletLayout = useMediaQuery({ maxWidth: 700 }, undefined, () => onSetSidebarActive(false));
   const isMobileLayout = useMediaQuery({ maxWidth: 375 }, undefined, () => onSetSidebarActive(false));
 
   return (
@@ -78,7 +77,7 @@ function FeedbackBoard(props: FeedbackBoardProps) {
         <div className='wrap'>
           <div className='title'>Frontend Mentor</div>
           <div className='sub'>Feedback Board</div>
-          <img className="toggle" src={sidebarActive ? IconClose : IconBurger} onClick={() => onToggleClick()} />
+          <img className="toggle" src={sidebarActive ? IconClose : IconBurger} alt='toggle icon' onClick={() => onToggleClick()} />
         </div>
       </div>
       <div className={`nav-wrap${sidebarActive ? ' active' : ''}`}>

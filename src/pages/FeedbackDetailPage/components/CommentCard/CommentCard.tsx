@@ -39,11 +39,15 @@ const Card = (props: CardProps) => {
   const productRequestData = useSelector(selectProductRequest);
 
   useEffect(() => {
-    if (!isEnabled) {
-      setEnabled(true);
-      setValue('');
-      setCollapsed(true);
-    }
+    setEnabled((isEnabled) => {
+      if (!isEnabled) {
+        setValue('');
+        setCollapsed(true);
+        return true;
+      }
+
+      return isEnabled;
+    })
   }, [productRequestData.productRequest]);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -67,7 +71,7 @@ const Card = (props: CardProps) => {
 
   return (
     <div className={`comment-card${isCollapsed ? ' collapsed' : ''}${isLast ? ' last' : ''}${isChild ? ' child' : ''}${isLastChild ? ' last-child' : ''}`}>
-      <img className='avatar' src={data.user.image} />
+      <img className='avatar' src={data.user.image} alt='avatar' />
       <div className='name-wrap'>
         <div className='name'>{data.user.name}</div>
         <div className='username'>@{data.user.username}</div>

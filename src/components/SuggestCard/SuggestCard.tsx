@@ -67,7 +67,7 @@ export function SuggestCardLoading(props: SuggestCardLoadingProps) {
 export function SuggestCardEmpty() {
   return (
     <div className='suggest-card empty'>
-      <img src={EmptyImage} />
+      <img src={EmptyImage} alt='empty'/>
       <div className='title'>There is no feedback yet.</div>
       <div className='desc'>Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.</div>
       <Link to={`${rootURL}/new`} className='suggest-add link-button bt-1' state={{ from: [rootURL +'/'] }}>+ Add Feedback</Link>

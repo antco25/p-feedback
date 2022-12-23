@@ -21,7 +21,7 @@ function RoadmapPage() {
 
   useEffect(() => {
     dispatch(fetchRoadmap());
-  }, [])
+  }, [dispatch])
 
   const handleSetStatusNav = (status: string) => {
     if (roadmapStatus !== 'ready') return

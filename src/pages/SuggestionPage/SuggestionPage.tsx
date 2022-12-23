@@ -4,15 +4,13 @@ import FeedbackBoard from './components/FeedbackBoard/FeedbackBoard';
 import SuggestCard, { SuggestCardEmpty, SuggestCardLoading } from '../../components/SuggestCard/SuggestCard';
 import { fetchProductRequests, selectProductRequests, setCategoryFilters, setCurrentUser, setProductRequests, setSorting, setUpvote } from '../../redux/data/dataSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Location, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { feedbackCategory, FeedbackCategory, FilterType, sortCategory, SortCategory } from '../../data/database';
 import TransitionPage from '../../components/App/TransitionPage/TransitionPage';
 import { rootURL } from '../../components/App/App';
 
 function SuggestionPage() {
-  const location = useLocation();
-
   const { currentUser, productRequests, productRequestStatus, sortBy, categoryFilters } = useSelector(selectProductRequests)
   const dispatch = useDispatch();
 
@@ -22,30 +20,33 @@ function SuggestionPage() {
   useEffect(() => {
     let filters = { categories: categoryFilters, sortBy: sortBy };
 
-    //Case: ProductRequests hasn't been requested yet and page is loaded with URL Parameters
-    if (productRequestStatus === 'loading' && location.search !== "") {
-      filters = getURLFilters(location);
-      if (firstRender.current) {
-        dispatch(setCategoryFilters(filters.categories));
-        dispatch(setSorting(filters.sortBy));
-        dispatch(fetchProductRequests(filters))
+    //Case: Page is loaded for first time from URL or from a refresh
+    if (productRequestStatus === 'loading' && firstRender.current) {
+      firstRender.current = false;
+
+      if (window.location.search !== '') {
+        //Case: Page is reloaded with URL Parameters (ie: /home?categories=ux)
+        filters = getURLFilters(window.location.search);
+      }
+
+      dispatch(setCategoryFilters(filters.categories));
+      dispatch(setSorting(filters.sortBy));
+      dispatch(fetchProductRequests(filters))
+      return;
+    }
+
+    //Case: Page is already loaded & filters changed or going back
+    if (productRequestStatus === 'ready') {
+      if (isFiltersChanged(getURLFilters(window.location.search), filters) || firstRender.current) {
         firstRender.current = false;
-        return;
-      } else {
-        return;
+        
+        //Append new filter parameters to URL
+        setURL(filters);
+        dispatch(fetchProductRequests(filters))
       }
     }
 
-
-    if (productRequestStatus !== 'loading') {
-      //Case: Append filter parameters to URL filters change or when going back to page
-      setURL(filters);
-    }
-
-    //Request ProductRequests when page isn't loaded with URL params or when filters change
-    dispatch(fetchProductRequests(filters))
-    firstRender.current = false;
-  }, [categoryFilters, sortBy])
+  }, [dispatch, productRequestStatus, categoryFilters, sortBy])
 
   useEffect(() => {
     setStatus(productRequestStatus);
@@ -122,8 +123,8 @@ export function parseCategories(categoriesParam: string | null): FeedbackCategor
   return categories;
 }
 
-function getURLFilters(location: Location): FilterType {
-  const urlParams = new URLSearchParams(location.search);
+function getURLFilters(location: string): FilterType {
+  const urlParams = new URLSearchParams(location);
   const sortBy = parseSortBy(urlParams.get('sortBy'));
   const categories = parseCategories(urlParams.get('categories'));
 
@@ -136,11 +137,29 @@ function getURLFilters(location: Location): FilterType {
 function setURL(filter: FilterType) {
   let url = '';
   if (filter.categories.length === 0)
-    url = rootURL + '/home?' + 'categories=all' + '&sortBy=' + filter.sortBy;
+    url = rootURL + '/home?categories=all&sortBy=' + filter.sortBy;
   else
-    url = rootURL + '/home?' + 'categories=' + filter.categories.join('|') + '&sortBy=' + filter.sortBy;
+    url = rootURL + '/home?categories=' + filter.categories.join('|') + '&sortBy=' + filter.sortBy;
 
   window.history.pushState("", "", url);
+}
+
+function isFiltersChanged(_old: {
+  categories: ("ui" | "ux" | "enhancement" | "bug" | "feature")[];
+  sortBy: "most-upvotes" | "least-upvotes" | "most-comments" | "least-comments";
+}, _new: {
+  categories: ("ui" | "ux" | "enhancement" | "bug" | "feature")[];
+  sortBy: "most-upvotes" | "least-upvotes" | "most-comments" | "least-comments";
+}) {
+
+  if (_old.sortBy !== _new.sortBy) return true;
+  if (_old.categories.length !== _new.categories.length) return true;
+
+  _old.categories.forEach((c, i) => {
+    if (_new.categories[i] !== c) return true;
+  })
+
+  return false;
 }
 
 export default SuggestionPage;

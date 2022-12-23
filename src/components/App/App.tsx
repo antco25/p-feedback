@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUser, selectCurrentUser } from '../../redux/data/dataSlice';
 
-export const rootURL = '/fm-pro-2';
+export const rootURL = '/p-feedback';
 
 function App() {
   const currentUser = useSelector(selectCurrentUser)
@@ -22,7 +22,7 @@ function App() {
     else if (currentUser.currentUserStatus === 'ready') {
       setStatus('ready')
     }
-  }, [currentUser.currentUserStatus])
+  }, [dispatch, currentUser.currentUserStatus])
 
   if (status !== 'ready') {
     return <div className="App">Loading...</div>

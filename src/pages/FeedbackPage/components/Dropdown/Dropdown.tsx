@@ -55,7 +55,7 @@ function Dropdown(props: DropdownProps) {
   }, [props.value])
 
   useEffect(() => {
-    if (props.disabled != undefined)
+    if (props.disabled !== undefined)
       setDisabled(props.disabled);
   }, [props.disabled])
 

@@ -1,4 +1,4 @@
-# Frontend Mentor - Product feedback app solution
+# Product Feedback Application
 
 This is a solution to the [Product feedback app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/product-feedback-app-wbvUYqjR6). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
@@ -33,7 +33,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [https://antco25.github.io/fm-pro-2/](https://antco25.github.io/fm-pro-2/)
+- Live Site URL: [https://antcodev.ca/p-feedback](https://antcodev.ca/p-feedback)
 
 ## My process
 
@@ -47,7 +47,15 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Redux](https://redux.js.org/) - JS library
 
+### What I learned
+
+- This project utilized a custom "front-end database" where the data can be stored and allows
+  the user to save the work but its not persistant and will reset on a refresh. This was because the
+  project was suppose to be front-end only and I was trying to avoid making a true backend but as I progressed
+  I kept adding more and more features to it. In hindsight, making the project full-stack and using an actual backend framework
+  like Express/MongoDB would have been much easier and sensible than what I ended up doing. 
+
 ## Author
 
-- [My Portfolio](https://antco25.github.io)
+- [My Portfolio](https://antcodev.ca)
 

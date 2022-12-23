@@ -11,7 +11,7 @@ import thomas from '../assets/user-images/image-thomas.jpg';
 import victoria from '../assets/user-images/image-victoria.jpg';
 import zena from '../assets/user-images/image-zena.jpg';
 
-export default {
+const data = {
   "currentUser": {
     "image": zena,
     "name": "Zena Kelley",
@@ -313,3 +313,5 @@ export default {
     }
   ]
 }
+
+export default data;

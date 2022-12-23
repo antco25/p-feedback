@@ -24,12 +24,11 @@ function FeedbackDetailPage() {
 
   useEffect(() => {
     dispatch(fetchProductRequest(id || ''));
-    productRequestData.productRequestStatus = 'loading';
-  }, [])
+  }, [dispatch, id])
 
   useEffect(() => {
     if (productRequestData.productRequestStatus === 'error') navigate(rootURL)
-  }, [productRequestData.productRequestStatus])
+  }, [navigate, productRequestData.productRequestStatus])
 
   const currentUser = currentUserData.currentUser;
   const productRequest = productRequestData.productRequest;

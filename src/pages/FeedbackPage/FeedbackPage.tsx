@@ -2,7 +2,7 @@ import './FeedbackPage.scss';
 import IconNew from '../../assets/shared/icon-new-feedback.svg';
 import IconEdit from '../../assets/shared/icon-edit-feedback.svg';
 import { CategoryDropdown, StatusDropdown } from './components/Dropdown/Dropdown';
-import { Link, To, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FeedbackCategory, FeedbackStatus } from '../../data/database';
 import { useEffect, useState } from 'react';
 import TransitionPage from '../../components/App/TransitionPage/TransitionPage';
@@ -55,11 +55,14 @@ function FeedbackPage(props: MainFeedbackPageProps) {
     if (productRequestStatus === 'ready' && productRequest.id.toString() === id) {
       return;
     }
+    //Case: Page is reloaded or loaded directly
+    if (productRequest.id === undefined) {
+      dispatch(fetchProductRequest(id || ''));
+      setLoading(true);
+      setLock(true);
+    }
 
-    dispatch(fetchProductRequest(id || ''));
-    setLoading(true);
-    setLock(true);
-  }, [])
+  }, [dispatch, id, isEdit, productRequestStatus, productRequest])
 
   useEffect(() => {
     if (!isEdit) {
@@ -78,7 +81,7 @@ function FeedbackPage(props: MainFeedbackPageProps) {
     if (productRequestStatus === 'error') {
       navigate(rootURL);
     }
-  }, [productRequestStatus])
+  }, [navigate, productRequestStatus, productRequest, isEdit])
 
   const onCategorySelect = (v: FeedbackCategory) => { setCategory(v) }
   const onStatusSelect = (v: FeedbackStatus) => { setStatus(v) }
@@ -152,7 +155,7 @@ function FeedbackPage(props: MainFeedbackPageProps) {
       navigate(returnURL, { state: { from: returnURLState } });
     } else {
       //Case: Reached edit page from detail page
-      const updatedReturnURL = returnURLState[returnURLState.length - 1] 
+      const updatedReturnURL = returnURLState[returnURLState.length - 1]
       const updatedReturnURLState = returnURLState.length > 1 ? returnURLState.slice(0, returnURLState.length - 1) : ['/'];
       navigate(updatedReturnURL, { state: { from: updatedReturnURLState } });
     }
@@ -162,12 +165,12 @@ function FeedbackPage(props: MainFeedbackPageProps) {
     <TransitionPage>
       <div className={`feedback-page${isEdit ? ' edit' : ''}${loading ? ' loading' : ''}`}>
         {
-          lock ? <a className='return-link'>Go Back</a> :
+          lock ? <span className='return-link'>Go Back</span> :
             <Link to={returnURL} state={{ from: returnURLState }} className={`return-link`}>Go Back</Link>
         }
 
         <div className='card'>
-          <img className='card-icon' src={isEdit ? IconEdit : IconNew} />
+          <img className='card-icon' src={isEdit ? IconEdit : IconNew} alt='card icon' />
           <div className='card-title'>{isEdit ? `Editing '${productRequest.title}'` : 'Create New Feedback'}</div>
           <div className={`feedback-input${errorTextInput[0] ? ' error' : ''}`}>
             <div className='title'>Feedback Title</div>

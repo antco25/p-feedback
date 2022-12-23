@@ -16,7 +16,7 @@ function SuggestBar(props: SuggestBarProps) {
   return (
     <div className='suggest-bar'>
       <div className={`suggest-count${loading ? ' loading' : ''}`}>
-        <img src={IconSuggestions} />
+        <img src={IconSuggestions} alt='suggestion icon' />
         <span>{`${suggestionsCount} ${suggestionsCount === 1 ? 'Suggestion' : 'Suggestions'}`}</span>
       </div>
       <SuggestSort sort={sort} />

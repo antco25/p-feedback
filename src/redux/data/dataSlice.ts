@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { Database, FeedbackCategory, ProductRequest, SortCategory, CurrentUser, FilterType, RoadmapCountType, RoadmapType } from '../../data/database';
 import { RootState } from '../store'
 
-const database = new Database;
+const database = new Database();
 
 export const fetchCurrentUser = createAsyncThunk(
     'data/fetchCurrentUser',

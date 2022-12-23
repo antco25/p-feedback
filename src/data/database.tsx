@@ -139,7 +139,7 @@ function getCommentsLength(comments: Comment[]) {
  */
 
 function mockAPICall(time?: number) {
-    const _time = time ? time : 1000;
+    const _time = time ? time : 400;
 
     return new Promise(resolve => {
         setTimeout(() => {
@@ -234,7 +234,7 @@ export class Database {
         await mockAPICall();
         const id = Number(idParam);
 
-        if (id === NaN || !Number.isInteger(id)) {
+        if (isNaN(id) || !Number.isInteger(id)) {
             throw new TypeError();
         }
 
